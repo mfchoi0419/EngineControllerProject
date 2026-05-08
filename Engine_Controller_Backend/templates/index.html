@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Page title shown in browser tab -->
+    <title>Engine Controller</title>
+
+    <!-- CSS styling file -->
+    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Chart.js library (currently unused because custom canvas drawing is used instead) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Main webpage container-->
+    <div class="container">
+
+        <!-- Main title-->
+        <h1>CHP Engine Controller</h1>
+
+        <!-- ------------------------------------------------- -->
+        <!-- CONTROL BUTTONS -->
+        <!-- ------------------------------------------------- -->
+
+        <div class="buttons">
+
+            <!-- Sends POST request to /api/star t-->
+            <button onclick="sendCommand('/api/start')">Start Engine</button>
+            
+            <!-- Sends POST request to /api/stop -->
+            <button onclick="sendCommand('/api/stop')" class="stop">Stop Engine</button>
+
+            <!-- Enable automatic mode -->
+            <button onclick="sendCommand('/api/auto_on')">Automation On</button>
+
+            <!-- Disable automatic mode -->
+            <button onclick="sendCommand('/api/auto_off')">Automation Off</button>
+
+            <!-- Sequential output pin test -->
+            <button onclick="sendCommand('/api/test_pins')" class="test">Test Pins</button>
+        </div>
+
+        <!-- ------------------------------------------------- -->
+        <!-- STATUS DISPLAY -->
+        <!-- ------------------------------------------------- -->
+
+        <div class="status">
+
+            <!-- These span elements are updated by script.js -->
+
+            <p>Engine: <span id="engineOn">Loading...</span></p>
+            <p>Automation: <span id="autoMode">Loading...</span></p>
+            <p>Gas Solenoid: <span id="gasOpen">Loading...</span></p>
+            <p>Oil Pump: <span id="oilPumpOn">Loading...</span></p>
+            <p>Magneto Kill: <span id="magnetoKillOn">Loading...</span></p>
+            <p>Starter: <span id="starterOn">Loading...</span></p>
+            <p>Choke Angle: <span id="chokeAngle">Loading...</span></p>
+            <p>Temperature: <span id="temperatureF">Loading...</span> °F</p>
+            <p>O2 Voltage: <span id="o2Voltage">Loading...</span> V</p>
+        </div>
+
+        <!-- ------------------------------------------------- -->
+        <!-- CHARTS -->
+        <!-- ------------------------------------------------- -->
+
+        <div class="charts">
+            <h2>Temperature Histogram</h2>
+
+            <!-- Temperature chart canvas -->
+            <canvas id="tempChart" width="800" height="300"></canvas>
+
+            <h2>O2 Histogram</h2>
+
+            <!-- O2 chart canvas-->
+            <canvas id="o2Chart" width="800" height="300"></canvas>
+        </div>
+
+        <!-- ------------------------------------------------- -->
+        <!-- RAW JSON DEBUG OUTPUT -->
+        <!-- ------------------------------------------------- -->
+
+        <pre id="log"></pre>
+    </div>
+
+    <!-- Load frontend JavaScript -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
